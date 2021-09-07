@@ -1,3 +1,10 @@
+<!--
+ * @file: description
+ * @author: huhao03
+ * @Date: 2021-09-07 11:09:00
+ * @LastEditors: huhao03
+ * @LastEditTime: 2021-09-07 11:24:29
+-->
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
@@ -8,11 +15,26 @@
 <script lang="ts">
 import Vue from 'vue';
 import HelloWorld from './components/HelloWorld.vue';
+import FMP from './fmp/fmp'
 
 export default Vue.extend({
   name: 'App',
   components: {
     HelloWorld
+  },
+  beforeCreate(){
+    (async function fun(){
+        const fmp = new FMP()
+        setTimeout(()=>{
+            const fmpTime = fmp.fmpTime
+            console.log('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
+            console.log(fmpTime);
+            console.log('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
+            console.log(fmp);
+            console.log('🍌🍌🍌🍌🍌🍌🍌🍌🍌');
+        },6000)
+        
+    })()
   }
 });
 </script>
