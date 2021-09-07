@@ -3,7 +3,7 @@
  * @author: huhao03
  * @Date: 2021-09-07 11:09:00
  * @LastEditors: huhao03
- * @LastEditTime: 2021-09-07 14:16:13
+ * @LastEditTime: 2021-09-07 14:23:04
 -->
 <template>
   <div id="app">
@@ -24,9 +24,9 @@ export default Vue.extend({
   },
   beforeCreate(){
     (async function fun(){
-        const fmp = await new FMP()
+        const fmp = new FMP()
         setTimeout(()=>{
-            const fmpTime = fmp.fmpTime
+            const  fmpTime = fmp.fmpTime
             console.log('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
             console.log(fmpTime);
             console.log('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
