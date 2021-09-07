@@ -1,14 +1,3 @@
-/* eslint-disable */
-// @ts-nocheck
-/**
-* @file: description
-* @author: huhao03
-* @Date: 2021-09-06 20:25:01
- * @LastEditors: huhao03
- * @LastEditTime: 2021-09-07 11:30:31
- */
-
- 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -26,8 +15,8 @@
  * limitations under the License.
  */
  import { ICalScore, ElementList } from './type';
- 
-  const getStyle = (element: Element | any, attr: any) => {
+
+ const getStyle = (element: Element | any, attr: any) => {
    if (window.getComputedStyle) {
      return window.getComputedStyle(element, null)[attr];
    } else {
@@ -115,6 +104,7 @@
          this.observer.disconnect();
          this.flag = false;
          const res = this.getTreeScore(document.body);
+         // @ts-ignore
          let tp: ICalScore = null;
          for (const item of res.dpss) {
            if (tp && tp.st) {
@@ -126,12 +116,13 @@
            }
          }
          // Get all of soures load time
+         // @ts-ignore
          performance.getEntries().forEach((item: PerformanceResourceTiming) => {
            this.entries[item.name] = item.responseEnd;
          });
          if (!tp) {
            return false;
-         }ee
+         }
          const resultEls: ElementList = this.filterResult(tp.els);
          const fmpTiming: number = this.getFmpTime(resultEls);
          this.fmpTime = fmpTiming;
@@ -147,27 +138,32 @@
      for (const item of resultEls) {
        let time = 0;
        if (item.weight === 1) {
+          // @ts-ignore
          const index: number = parseInt(item.ele.getAttribute('fmp_c'), 10);
          time = this.statusCollector[index].time;
        } else if (item.weight === 2) {
          if (item.ele.tagName === 'IMG') {
            time = this.entries[(item.ele as HTMLImageElement).src];
-         } else if (item.ele.tagName === 'SVG') {wwwwwwwwwwwwwwwwwwwwwwwwwwww
+         } else if (item.ele.tagName === 'SVG') {
+           // @ts-ignore
            const index: number = parseInt(item.ele.getAttribute('fmp_c'), 10);
            time = this.statusCollector[index].time;
          } else {
-           const match = getStyle(item.ele, 'background-image').match(/url\(\"(.*?)\"\)/);
+           const match = getStyle(item.ele, 'background-image').match(/url\("(.*?)"\)/);
            let url: string;
            if (match && match[1]) {
              url = match[1];
            }
+           // @ts-ignore
            if (!url.includes('http')) {
              url = location.protocol + match[1];
            }
+           // @ts-ignore
            time = this.entries[url];
          }
        } else if (item.weight === 4) {
          if (item.ele.tagName === 'CANVAS') {
+           // @ts-ignore
            const index: number = parseInt(item.ele.getAttribute('fmp_c'), 10);
            time = this.statusCollector[index] && this.statusCollector[index].time;
          } else if (item.ele.tagName === 'VIDEO') {
